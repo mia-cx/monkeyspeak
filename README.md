@@ -2,7 +2,7 @@
 
 Practice turning an idea into a clear spoken prompt, fast.
 
-Start a round, see an idea for an app, think, and speak your prompt. Get feedback on time, duplication, and usefulness. Browser speech recognition and a small local model are the intended direction. This repository currently holds the planning entrypoint.
+Start a round, see an idea for an app, think, and speak your prompt. Get feedback on time, duplication, and usefulness. [SCORING.md](SCORING.md) defines those grades, the clock, and what earns a personal best. Browser speech recognition and a small local model are the intended direction. This repository currently holds the planning entrypoint.
 
 Monkeyspeak is a working name. Join the [naming workshop](https://github.com/mia-cx/monkeyspeak/issues/8) to help choose it.
 
