@@ -52,10 +52,11 @@ async function loadClips() {
 
 async function load(name, device) {
   const [id, wasmDtype, gpuDtype] = MODELS[name];
-  let bytes = 0;
+  const totals = {};
   const t = performance.now();
   const asr = await pipeline("automatic-speech-recognition", id, { device, dtype: device === "webgpu" ? gpuDtype : wasmDtype,
-    progress_callback: (p) => { if (p.status === "done" && p.total) bytes += p.total; } });
+    progress_callback: (p) => { if (p.status === "progress" && p.total) totals[p.file] = p.total; } });
+  const bytes = Object.values(totals).reduce((a, b) => a + b, 0);
   return { asr, loadMs: Math.round(performance.now() - t), downloadMB: +(bytes / 1e6).toFixed(1) };
 }
 
