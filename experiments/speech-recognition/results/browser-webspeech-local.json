@@ -1,0 +1,201 @@
+{
+ "check": {
+  "supported": true,
+  "unprefixed": true,
+  "processLocally": true,
+  "available": true,
+  "localEnUS": "downloading"
+ },
+ "install": {
+  "error": "install() did not settle in 120 s"
+ },
+ "clips": [
+  {
+   "set": "synth",
+   "file": "s1_correction.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "Build a habit tracker. Um, a habit tracker that, uh, lets people log daily habits. No, wait, weekly habits, and show a streak for each one."
+  },
+  {
+   "set": "synth",
+   "file": "s2_repetition.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "Make a, a recipe app where users, users can save recipes and, like, filter them by ingredients they already have."
+  },
+  {
+   "set": "synth",
+   "file": "s3_long_pause.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "Create a budgeting app for students. It should import bank transactions, group them by category, and warn before rent is due."
+  },
+  {
+   "set": "ami",
+   "file": "ami_31.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "I MEAN IF YOU ALREADY STARTED ON ON DOING YOUR STUFF I GUESS WE CAN"
+  },
+  {
+   "set": "ami",
+   "file": "ami_37.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "PROBABLY JUST TWO OR TWO OR THREE OF WHATEVER WHATEVER THEY'RE LOOKING AT LIKE DIALOGUE ACTS TO WHATEVER CHARACTERISATIONS"
+  },
+  {
+   "set": "ami",
+   "file": "ami_41.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "ACTUALLY IS THE CODE ACCESSIBLE LIKE THE THE GUI STUFF THAT YOU'VE DONE YEAH"
+  },
+  {
+   "set": "ami",
+   "file": "ami_52.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "YEAH UH CHANGE THE CONTENTS OF THE SAME WINDOW LIKE FROM TRANSCRIPTION TO SUMMARY"
+  },
+  {
+   "set": "ami",
+   "file": "ami_78.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "WE'VE GO A BROWSER WE'VE UM WHICH COMES UP AUTOMATICALLY WITH A TRANSCRIPTION BOX AND THE TOPICS"
+  },
+  {
+   "set": "ami",
+   "file": "ami_152.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "IT'S ACTUALLY ALL THESE ALL THESE UM THINGS ARE ARE NICKED FROM UM YOU KNOW ALL THESE DROP DOWN MENUS AND TICK BOXES ARE NICKED FROM GOOGLE ONLINE"
+  },
+  {
+   "set": "ami",
+   "file": "ami_192.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "SO BASICALLY WE GO AND GO AND DO SOME WORK REALLY I THINK THAT'S THE UM THE UM THE ANSWER TO THAT ISN'T IT"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1049.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "UM NOW I WONDER WH HOW WE WANNA DO YOU KNOW WE WANT A POP UP WINDOW WITH THE SPEAKER CHARACTERISATION"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1140.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "ACTUALLY IN THE MOMENT IT'S GOT A LOAD OF RUBBISH BECAUSE THE THE UM THE BROWSER THAT I USED FROM THIS FROM YOU KNOW"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1146.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "YEAH YEAH BUT UM I DON'T KNOW ABOUT YOU BUT UH USUALLY IN WINDOWS RIGHT CLICK DOESN'T DO ANYTHING DOES IT"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1379.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "UM UM SO MAYBE I MEAN WE WE SHOULD WE SHOULD DEFINITELY WELL WE COULD PROBABLY NOT PUT IT UNDER THIS HEADING"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1430.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "UM YEAH I MEAN UM AT THE MOMENT IT WORKS IT WORKS WITH HIGHLIGHTING IN IN THE TRANSCRIPT WINDOW DOESN'T IT"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1437.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "UM I THINK UH I WAS WONDERING ABOUT THAT IS UH I HAVEN'T LOOKED AT IT SO MUCH"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1578.wav",
+   "local": true,
+   "text": "",
+   "results": [],
+   "errors": [
+    "language-not-supported"
+   ],
+   "ref": "FLIP IT INTO UH YEAH JUST UH TRANSFORMS UM LIKE UM STYLE SHEET THE UM X. M. L. STYLE SHEET"
+  }
+ ]
+}

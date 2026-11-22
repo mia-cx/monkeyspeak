@@ -1,0 +1,132 @@
+<!doctype html>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Monkeyspeak speech recognition probe</title>
+<style>body{font:15px system-ui;margin:1rem;max-width:60rem}pre{white-space:pre-wrap;background:#f4f4f4;padding:.5rem}button,select{font:inherit;margin:.2rem}</style>
+<h1>Speech recognition probe</h1>
+<p>Runs one model on the bundled clips (or your microphone) entirely in this tab and reports size, load time, speed and transcripts.</p>
+<label>Model <select id="model"></select></label>
+<label>Device <select id="device"><option>wasm</option><option>webgpu</option></select></label>
+<button id="run">Run on clips</button> <button id="mic">Record 10 s and transcribe</button> <button id="webspeech">Check Web Speech API</button>
+<pre id="env"></pre>
+<pre id="out"></pre>
+<script type="module">
+import { pipeline, env } from "./transformers.web.js";
+env.backends.onnx.wasm.wasmPaths = "./ort/";
+const MODELS = {
+  "moonshine-tiny": ["onnx-community/moonshine-tiny-ONNX", "q8", "fp32"],
+  "moonshine-base": ["onnx-community/moonshine-base-ONNX", "q8", "fp32"],
+  "whisper-tiny.en": ["onnx-community/whisper-tiny.en", "q8", { encoder_model: "fp32", decoder_model_merged: "q4" }],
+  "whisper-base.en": ["onnx-community/whisper-base.en", "q8", { encoder_model: "fp32", decoder_model_merged: "q4" }],
+  "whisper-small.en": ["onnx-community/whisper-small.en", "q8", { encoder_model: "fp16", decoder_model_merged: "q4" }],
+};
+const $ = (id) => document.getElementById(id);
+for (const k of Object.keys(MODELS)) $("model").add(new Option(k));
+const log = (s) => { $("out").textContent += s + "\n"; console.log(s); };
+const result = (window.probeResult = { env: {}, runs: [] });
+
+async function describeEnv() {
+  const e = result.env;
+  e.userAgent = navigator.userAgent;
+  e.cores = navigator.hardwareConcurrency; e.deviceMemoryGB = navigator.deviceMemory ?? null;
+  e.crossOriginIsolated = crossOriginIsolated;
+  e.webgpu = false;
+  if (navigator.gpu) { try { const a = await navigator.gpu.requestAdapter(); e.webgpu = !!a; e.gpu = a?.info ? `${a.info.vendor} ${a.info.architecture} ${a.info.description}` : null; e.shaderF16 = a?.features.has("shader-f16") ?? false; } catch (err) { e.webgpuError = String(err); } }
+  const est = await navigator.storage?.estimate?.(); e.storageQuotaMB = est ? Math.round(est.quota / 1e6) : null;
+  $("env").textContent = JSON.stringify(e, null, 1);
+}
+await describeEnv();
+
+async function loadClips() {
+  const refs = { synth: await (await fetch("../audio/synth/refs.json")).json(), ami: await (await fetch("../audio/ami/refs.json")).json() };
+  const ctx = new AudioContext({ sampleRate: 16000 });
+  const clips = [];
+  for (const [set, r] of Object.entries(refs)) for (const [k, v] of Object.entries(r)) {
+    const file = v.file ?? `${k}.wav`;
+    if (window.clipLimit && clips.length >= window.clipLimit) break;
+    const buf = await ctx.decodeAudioData(await (await fetch(`../audio/${set}/${file}`)).arrayBuffer());
+    clips.push({ set, file, ref: v.ref, audio: buf.getChannelData(0) });
+  }
+  return clips;
+}
+
+async function load(name, device) {
+  const [id, wasmDtype, gpuDtype] = MODELS[name];
+  let bytes = 0;
+  const t = performance.now();
+  const asr = await pipeline("automatic-speech-recognition", id, { device, dtype: device === "webgpu" ? gpuDtype : wasmDtype,
+    progress_callback: (p) => { if (p.status === "done" && p.total) bytes += p.total; } });
+  return { asr, loadMs: Math.round(performance.now() - t), downloadMB: +(bytes / 1e6).toFixed(1) };
+}
+
+window.runProbe = async (name = $("model").value, device = $("device").value) => {
+  log(`== ${name} on ${device}`);
+  const clips = await loadClips();
+  const { asr, loadMs, downloadMB } = await load(name, device);
+  log(`load ${loadMs} ms (download counted ${downloadMB} MB; 0 means served from cache)`);
+  const t0 = performance.now(); await asr(clips[0].audio); const firstMs = Math.round(performance.now() - t0);
+  const rows = [];
+  for (const c of clips) {
+    const t = performance.now(); const { text } = await asr(c.audio, { max_new_tokens: 200 }); const ms = performance.now() - t;
+    const dur = c.audio.length / 16000;
+    rows.push({ file: c.file, durS: +dur.toFixed(2), ms: Math.round(ms), rtf: +(ms / 1000 / dur).toFixed(3), hyp: text.trim() });
+    log(`[${c.file}] ${Math.round(ms)} ms rtf ${(ms / 1000 / dur).toFixed(2)}  ${text.trim()}`);
+  }
+  const meanRtf = +(rows.reduce((a, r) => a + r.rtf, 0) / rows.length).toFixed(3);
+  const run = { name, device, loadMs, downloadMB, firstInferenceMs: firstMs, meanRtf, jsHeapMB: performance.memory ? Math.round(performance.memory.usedJSHeapSize / 1e6) : null, rows };
+  result.runs.push(run); log(`mean RTF ${meanRtf}, first inference ${firstMs} ms`);
+  await asr.dispose();
+  return run;
+};
+$("run").onclick = () => window.runProbe().catch((e) => log("ERROR " + e));
+
+$("mic").onclick = async () => {
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: false, noiseSuppression: false, autoGainControl: false } });
+  const rec = new MediaRecorder(stream); const chunks = [];
+  rec.ondataavailable = (e) => chunks.push(e.data); rec.start(); log("recording 10 s…");
+  await new Promise((r) => setTimeout(r, 10000)); rec.stop(); await new Promise((r) => (rec.onstop = r)); stream.getTracks().forEach((t) => t.stop());
+  const audio = (await new AudioContext({ sampleRate: 16000 }).decodeAudioData(await new Blob(chunks).arrayBuffer())).getChannelData(0);
+  const { asr, loadMs } = await load($("model").value, $("device").value);
+  const t = performance.now(); const { text } = await asr(audio); log(`mic: load ${loadMs} ms, transcribe ${Math.round(performance.now() - t)} ms: ${text}`);
+};
+
+window.checkWebSpeech = async () => {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = { supported: !!SR, unprefixed: !!window.SpeechRecognition, processLocally: !!SR && "processLocally" in SR.prototype, available: !!SR?.available };
+  if (SR?.available) { try { r.localEnUS = await SR.available({ langs: ["en-US"], processLocally: true }); } catch (e) { r.localError = String(e); } }
+  result.env.webSpeech = r; log("Web Speech: " + JSON.stringify(r));
+  return r;
+};
+$("webspeech").onclick = () => window.checkWebSpeech();
+
+window.installWebSpeech = async () => {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const t = performance.now();
+  const ok = await SR.install({ langs: ["en-US"], processLocally: true });
+  const r = { installed: ok, ms: Math.round(performance.now() - t), after: await SR.available({ langs: ["en-US"], processLocally: true }) };
+  log("Web Speech install: " + JSON.stringify(r)); return r;
+};
+
+// Feeds a clip to Web Speech through start(MediaStreamTrack), so the same audio is tested without a microphone.
+window.webSpeechClip = async (set, file, { local = true } = {}) => {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const ctx = new AudioContext();
+  const buf = await ctx.decodeAudioData(await (await fetch(`../audio/${set}/${file}`)).arrayBuffer());
+  const dest = ctx.createMediaStreamDestination();
+  const src = ctx.createBufferSource(); src.buffer = buf; src.connect(dest);
+  const rec = new SR(); rec.lang = "en-US"; rec.continuous = true; rec.interimResults = false; rec.maxAlternatives = 1;
+  if ("processLocally" in rec) rec.processLocally = local;
+  const results = [], errors = [];
+  let tEnd;
+  rec.onresult = (e) => { for (let i = e.resultIndex; i < e.results.length; i++) if (e.results[i].isFinal) results.push({ text: e.results[i][0].transcript, confidence: e.results[i][0].confidence, start: e.results[i].speechStartTime, end: e.results[i].speechEndTime, lagMs: tEnd ? Math.round(performance.now() - tEnd) : null }); };
+  rec.onerror = (e) => errors.push(e.error + (e.message ? ": " + e.message : ""));
+  const done = new Promise((r) => (rec.onend = r));
+  rec.start(dest.stream.getAudioTracks()[0]);
+  await new Promise((r) => setTimeout(r, 300));
+  src.start(); src.onended = () => { tEnd = performance.now(); setTimeout(() => rec.stop(), 1500); };
+  await Promise.race([done, new Promise((r) => setTimeout(r, (buf.duration + 15) * 1000))]);
+  ctx.close();
+  const out = { set, file, local, text: results.map((r) => r.text.trim()).join(" "), results, errors };
+  log("webspeech " + JSON.stringify(out)); return out;
+};
+</script>

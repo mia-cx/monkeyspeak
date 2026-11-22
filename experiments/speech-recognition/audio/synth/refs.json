@@ -1,0 +1,55 @@
+{
+ "s1_correction": {
+  "ref": "Build a habit tracker. Um, a habit tracker that, uh, lets people log daily habits. No, wait, weekly habits, and show a streak for each one.",
+  "segments": [
+   {
+    "text": "Build a habit tracker.",
+    "start": 0.3,
+    "end": 1.326
+   },
+   {
+    "text": "Um, a habit tracker that, uh, lets people log daily habits.",
+    "start": 2.526,
+    "end": 6.494
+   },
+   {
+    "text": "No, wait, weekly habits, and show a streak for each one.",
+    "start": 7.994,
+    "end": 11.053
+   }
+  ],
+  "duration": 11.353
+ },
+ "s2_repetition": {
+  "ref": "Make a, a recipe app where users, users can save recipes and, like, filter them by ingredients they already have.",
+  "segments": [
+   {
+    "text": "Make a, a recipe app where users, users can save recipes",
+    "start": 0.3,
+    "end": 4.526
+   },
+   {
+    "text": "and, like, filter them by ingredients they already have.",
+    "start": 6.526,
+    "end": 9.789
+   }
+  ],
+  "duration": 10.089
+ },
+ "s3_long_pause": {
+  "ref": "Create a budgeting app for students. It should import bank transactions, group them by category, and warn before rent is due.",
+  "segments": [
+   {
+    "text": "Create a budgeting app for students.",
+    "start": 0.3,
+    "end": 2.104
+   },
+   {
+    "text": "It should import bank transactions, group them by category, and warn before rent is due.",
+    "start": 5.104,
+    "end": 9.94
+   }
+  ],
+  "duration": 10.24
+ }
+}

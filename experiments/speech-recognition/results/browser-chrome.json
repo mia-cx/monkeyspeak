@@ -1,0 +1,545 @@
+{
+ "env": {
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36; Devin/1.0; +devin.ai",
+  "cores": 8,
+  "deviceMemoryGB": 32,
+  "crossOriginIsolated": true,
+  "webgpu": false,
+  "gpu": null,
+  "shaderF16": false,
+  "storageQuotaMB": 10948
+ },
+ "webSpeech": {
+  "supported": true,
+  "unprefixed": true,
+  "processLocally": true,
+  "available": true,
+  "localEnUS": "downloading"
+ },
+ "runs": [
+  {
+   "name": "moonshine-tiny",
+   "device": "wasm",
+   "loadMs": 1642,
+   "downloadMB": 0,
+   "firstInferenceMs": 694,
+   "meanRtf": 0.034,
+   "jsHeapMB": 78,
+   "rows": [
+    {
+     "file": "s1_correction.wav",
+     "durS": 11.35,
+     "ms": 435,
+     "rtf": 0.038,
+     "hyp": "Build a habit tracker, Um, a habit tracker, that, Ah, let's people log daily habits. No weight, weekly habits, and show a streak for each one."
+    },
+    {
+     "file": "s2_repetition.wav",
+     "durS": 10.09,
+     "ms": 252,
+     "rtf": 0.025,
+     "hyp": "Make a a recipe app where users users can save recipes and like filter them by ingredients they already have"
+    },
+    {
+     "file": "s3_long_pause.wav",
+     "durS": 10.24,
+     "ms": 263,
+     "rtf": 0.026,
+     "hyp": "Create a budgeting app for students. It should import bank transactions group them by category, and warn before rent is due."
+    },
+    {
+     "file": "ami_31.wav",
+     "durS": 5.01,
+     "ms": 135,
+     "rtf": 0.027,
+     "hyp": "I mean if you already started on on doing stuff, I guess we can."
+    },
+    {
+     "file": "ami_37.wav",
+     "durS": 5.71,
+     "ms": 237,
+     "rtf": 0.041,
+     "hyp": "Probably just two or two or three of whatever, whatever they're looking at, like dialogue, like, uh, whatever, air condition."
+    },
+    {
+     "file": "ami_41.wav",
+     "durS": 4.44,
+     "ms": 132,
+     "rtf": 0.03,
+     "hyp": "Actually, is the code accessible like the the GUI stuff that you've done?"
+    },
+    {
+     "file": "ami_52.wav",
+     "durS": 6.06,
+     "ms": 160,
+     "rtf": 0.026,
+     "hyp": "Yeah, it changed the contents of the thing window, like from transcription to summary."
+    },
+    {
+     "file": "ami_78.wav",
+     "durS": 7.93,
+     "ms": 203,
+     "rtf": 0.026,
+     "hyp": "We've got a browser with Um, which comes up automatically with the transcription box and the topics."
+    },
+    {
+     "file": "ami_152.wav",
+     "durS": 10.46,
+     "ms": 351,
+     "rtf": 0.034,
+     "hyp": "It's actually all these, all these um things that are mixed from Um, you know, all these drop down menus and tick boxes are an itch from Google online."
+    },
+    {
+     "file": "ami_192.wav",
+     "durS": 5.05,
+     "ms": 228,
+     "rtf": 0.045,
+     "hyp": "So basically, we got kind of this work, really, yeah, that's uh, the um, the arts and the that, and the."
+    },
+    {
+     "file": "ami_1049.wav",
+     "durS": 7.88,
+     "ms": 228,
+     "rtf": 0.029,
+     "hyp": "Um, now I want to, how we want to do you know, we want to pop up one note with the speaker characterisation."
+    },
+    {
+     "file": "ami_1140.wav",
+     "durS": 6.4,
+     "ms": 242,
+     "rtf": 0.038,
+     "hyp": "Actually, in the moment it's got a load rubbish because the the the browser that I used from this from you know."
+    },
+    {
+     "file": "ami_1146.wav",
+     "durS": 6.24,
+     "ms": 293,
+     "rtf": 0.047,
+     "hyp": "Yeah, yeah, but um, I don't know about you, but usually in Windows, right, like doesn't do anything, is it?"
+    },
+    {
+     "file": "ami_1379.wav",
+     "durS": 10.07,
+     "ms": 331,
+     "rtf": 0.033,
+     "hyp": "Um, so maybe I mean we, we should. We should definitely. Well, we could probably not put it under this heading."
+    },
+    {
+     "file": "ami_1430.wav",
+     "durS": 6.28,
+     "ms": 264,
+     "rtf": 0.042,
+     "hyp": "Um, yeah, I mean, um, at the moment it works. It works with highlighting in in the transcript window, doesn't it?"
+    },
+    {
+     "file": "ami_1437.wav",
+     "durS": 5.31,
+     "ms": 184,
+     "rtf": 0.035,
+     "hyp": "Um, I think I was wondering about that is. Uh, I haven't looked at it so much."
+    },
+    {
+     "file": "ami_1578.wav",
+     "durS": 6.74,
+     "ms": 203,
+     "rtf": 0.03,
+     "hyp": "Flip it into just the transforms. Um, like um, style sheet, um, XML style sheet."
+    }
+   ],
+   "peakRendererMB": 747
+  },
+  {
+   "name": "moonshine-base",
+   "device": "wasm",
+   "loadMs": 4141,
+   "downloadMB": 0,
+   "firstInferenceMs": 947,
+   "meanRtf": 0.056,
+   "jsHeapMB": 74,
+   "rows": [
+    {
+     "file": "s1_correction.wav",
+     "durS": 11.35,
+     "ms": 710,
+     "rtf": 0.063,
+     "hyp": "Build a habit tracker. Um, a habit tracker that, ah, lets people log daily habits. No, wait, weekly habits and show a streak for each one."
+    },
+    {
+     "file": "s2_repetition.wav",
+     "durS": 10.09,
+     "ms": 392,
+     "rtf": 0.039,
+     "hyp": "Make a recipe app where users can save recipes and like filter them by ingredients they already have"
+    },
+    {
+     "file": "s3_long_pause.wav",
+     "durS": 10.24,
+     "ms": 430,
+     "rtf": 0.042,
+     "hyp": "Create a budgeting app for students. It should import bank transactions, group them by category, and warn before rent is due."
+    },
+    {
+     "file": "ami_31.wav",
+     "durS": 5.01,
+     "ms": 271,
+     "rtf": 0.054,
+     "hyp": "I mean if you already started on on doing stuff, I guess we can."
+    },
+    {
+     "file": "ami_37.wav",
+     "durS": 5.71,
+     "ms": 378,
+     "rtf": 0.066,
+     "hyp": "Probably just two or two or three of whatever, whatever they're looking at, like dialogue, X, to whatever air crazation."
+    },
+    {
+     "file": "ami_41.wav",
+     "durS": 4.44,
+     "ms": 312,
+     "rtf": 0.07,
+     "hyp": "Actually, is the code accessible? Like the the GUI stuff that you've done? Uh?"
+    },
+    {
+     "file": "ami_52.wav",
+     "durS": 6.06,
+     "ms": 329,
+     "rtf": 0.054,
+     "hyp": "Yeah, it changed the contents of the same window, like from the transcription to summary."
+    },
+    {
+     "file": "ami_78.wav",
+     "durS": 7.93,
+     "ms": 411,
+     "rtf": 0.052,
+     "hyp": "We've got a browser with um, which comes up automatically with the transcription box and the topics."
+    },
+    {
+     "file": "ami_152.wav",
+     "durS": 10.46,
+     "ms": 579,
+     "rtf": 0.055,
+     "hyp": "It's actually all these, all these um things are are nicked from Um, you know, all these drop diamagnes and tick boxes are nicked from Google one night."
+    },
+    {
+     "file": "ami_192.wav",
+     "durS": 5.05,
+     "ms": 343,
+     "rtf": 0.068,
+     "hyp": "So basically we got a kind of smart mini. I think that's the. The. Um. The answer to that is a bit."
+    },
+    {
+     "file": "ami_1049.wav",
+     "durS": 7.88,
+     "ms": 376,
+     "rtf": 0.048,
+     "hyp": "Um, now I wonder how we wanna do you know? We wanna pop up one over the speaker characterisation."
+    },
+    {
+     "file": "ami_1140.wav",
+     "durS": 6.4,
+     "ms": 381,
+     "rtf": 0.059,
+     "hyp": "Actually, in the moment it's got a load rubbish because the the the brands that are used from the from you know."
+    },
+    {
+     "file": "ami_1146.wav",
+     "durS": 6.24,
+     "ms": 400,
+     "rtf": 0.064,
+     "hyp": "Yeah, yeah, but um, I don't know about you, but usually in Windows, right, click doesn't do anything, doesn't."
+    },
+    {
+     "file": "ami_1379.wav",
+     "durS": 10.07,
+     "ms": 448,
+     "rtf": 0.045,
+     "hyp": "Um, um, so maybe I mean we, we should, we should definitely well, we could probably not put it under this heading."
+    },
+    {
+     "file": "ami_1430.wav",
+     "durS": 6.28,
+     "ms": 412,
+     "rtf": 0.066,
+     "hyp": "Um, yeah, I mean, um, at the moment it works. It works with highlighting in in the transcript window, doesn't it?"
+    },
+    {
+     "file": "ami_1437.wav",
+     "durS": 5.31,
+     "ms": 301,
+     "rtf": 0.057,
+     "hyp": "Um, I think I was wondering about that is Uh. I haven't looked at it so much."
+    },
+    {
+     "file": "ami_1578.wav",
+     "durS": 6.74,
+     "ms": 343,
+     "rtf": 0.051,
+     "hyp": "Flippant into a just uh, transforms um, like um, the style sheet, um, maximal style sheet."
+    }
+   ],
+   "peakRendererMB": 873
+  },
+  {
+   "name": "whisper-tiny.en",
+   "device": "wasm",
+   "loadMs": 1394,
+   "downloadMB": 0,
+   "firstInferenceMs": 979,
+   "meanRtf": 0.111,
+   "jsHeapMB": 86,
+   "rows": [
+    {
+     "file": "s1_correction.wav",
+     "durS": 11.35,
+     "ms": 749,
+     "rtf": 0.066,
+     "hyp": "Build a habit tracker. Um, a habit tracker that, uh, lets people log daily habits. No, wait, weekly habits, and show a streak for each one."
+    },
+    {
+     "file": "s2_repetition.wav",
+     "durS": 10.09,
+     "ms": 657,
+     "rtf": 0.065,
+     "hyp": "Make A, a recipe app where users, users can save recipes. And, like, filter them by ingredients they already have."
+    },
+    {
+     "file": "s3_long_pause.wav",
+     "durS": 10.24,
+     "ms": 652,
+     "rtf": 0.064,
+     "hyp": "Create a budgeting app for students. It should import bank transactions group them by category and warn before rent is due."
+    },
+    {
+     "file": "ami_31.wav",
+     "durS": 5.01,
+     "ms": 562,
+     "rtf": 0.112,
+     "hyp": "I mean, if you already started doing stuff, I guess we can..."
+    },
+    {
+     "file": "ami_37.wav",
+     "durS": 5.71,
+     "ms": 580,
+     "rtf": 0.102,
+     "hyp": "probably just two or three of whatever they're looking at like dialogue next to whatever"
+    },
+    {
+     "file": "ami_41.wav",
+     "durS": 4.44,
+     "ms": 831,
+     "rtf": 0.187,
+     "hyp": "actually is the code accessible like the GUI stuff that you've done."
+    },
+    {
+     "file": "ami_52.wav",
+     "durS": 6.06,
+     "ms": 1046,
+     "rtf": 0.173,
+     "hyp": "Yeah, it changed the contents of the same window, like from the transcription to summary."
+    },
+    {
+     "file": "ami_78.wav",
+     "durS": 7.93,
+     "ms": 910,
+     "rtf": 0.115,
+     "hyp": "We've got a browser with which comes up automatically with the transcription box and the topics."
+    },
+    {
+     "file": "ami_152.wav",
+     "durS": 10.46,
+     "ms": 958,
+     "rtf": 0.092,
+     "hyp": "It's actually all these things are nicked from, you know, these drop down menus and tick boxes are nicked from Google online."
+    },
+    {
+     "file": "ami_192.wav",
+     "durS": 5.05,
+     "ms": 1053,
+     "rtf": 0.208,
+     "hyp": "basically we got kind of this work, really I think that's it. I'll tell you, I'll do that, I'll do that."
+    },
+    {
+     "file": "ami_1049.wav",
+     "durS": 7.88,
+     "ms": 810,
+     "rtf": 0.103,
+     "hyp": "Now, I wonder how we want to do, you know, we want to pop up a window with a speaker characterization?"
+    },
+    {
+     "file": "ami_1140.wav",
+     "durS": 6.4,
+     "ms": 785,
+     "rtf": 0.123,
+     "hyp": "Actually in the moment it's got a load of rubbish because the the the browser that I used from this from you know"
+    },
+    {
+     "file": "ami_1146.wav",
+     "durS": 6.24,
+     "ms": 711,
+     "rtf": 0.114,
+     "hyp": "Yeah, yeah, but I don't know about you, but usually in Windows, right click, doesn't do anything, isn't it?"
+    },
+    {
+     "file": "ami_1379.wav",
+     "durS": 10.07,
+     "ms": 673,
+     "rtf": 0.067,
+     "hyp": "So maybe, I mean, we should definitely, well, we could probably not put it under this heading."
+    },
+    {
+     "file": "ami_1430.wav",
+     "durS": 6.28,
+     "ms": 633,
+     "rtf": 0.101,
+     "hyp": "Yeah, I mean, at the moment it works. It works with highlighting in the transcript window, doesn't it?"
+    },
+    {
+     "file": "ami_1437.wav",
+     "durS": 5.31,
+     "ms": 590,
+     "rtf": 0.111,
+     "hyp": "I think I was wondering about that is I haven't looked at it so much."
+    },
+    {
+     "file": "ami_1578.wav",
+     "durS": 6.74,
+     "ms": 563,
+     "rtf": 0.083,
+     "hyp": "flipping to just transforms on like style sheet XML style sheet."
+    }
+   ],
+   "peakRendererMB": 692
+  },
+  {
+   "name": "whisper-base.en",
+   "device": "wasm",
+   "loadMs": 2704,
+   "downloadMB": 0,
+   "firstInferenceMs": 1791,
+   "meanRtf": 0.177,
+   "jsHeapMB": 160,
+   "rows": [
+    {
+     "file": "s1_correction.wav",
+     "durS": 11.35,
+     "ms": 1360,
+     "rtf": 0.12,
+     "hyp": "Build a habit tracker. Um, a habit tracker that, uh, lets people log daily habits. No, wait, weekly habits and show a streak for each one."
+    },
+    {
+     "file": "s2_repetition.wav",
+     "durS": 10.09,
+     "ms": 1371,
+     "rtf": 0.136,
+     "hyp": "Make a, a recipe app where users, users can save recipes. And, like, filter them by ingredients they already have."
+    },
+    {
+     "file": "s3_long_pause.wav",
+     "durS": 10.24,
+     "ms": 1218,
+     "rtf": 0.119,
+     "hyp": "Create a budgeting app for students. It should import bank transactions group them by category and warn before rent is due."
+    },
+    {
+     "file": "ami_31.wav",
+     "durS": 5.01,
+     "ms": 1034,
+     "rtf": 0.206,
+     "hyp": "I mean, if you already started on doing stuff, I guess we can..."
+    },
+    {
+     "file": "ami_37.wav",
+     "durS": 5.71,
+     "ms": 1191,
+     "rtf": 0.209,
+     "hyp": "Probably just two or three of whatever they're looking at, like dialing next to whatever"
+    },
+    {
+     "file": "ami_41.wav",
+     "durS": 4.44,
+     "ms": 1058,
+     "rtf": 0.238,
+     "hyp": "Actually, is the code accessible like the GUI stuff that you've done."
+    },
+    {
+     "file": "ami_52.wav",
+     "durS": 6.06,
+     "ms": 1092,
+     "rtf": 0.18,
+     "hyp": "Yeah, it changed the contents of the same window, like from transcription to summary."
+    },
+    {
+     "file": "ami_78.wav",
+     "durS": 7.93,
+     "ms": 1097,
+     "rtf": 0.138,
+     "hyp": "We've got a browser with which comes up automatically with the transcription box and the topics."
+    },
+    {
+     "file": "ami_152.wav",
+     "durS": 10.46,
+     "ms": 1351,
+     "rtf": 0.129,
+     "hyp": "It's actually all these things that are nicked from these drop-down menus and tick boxes are nicked from Google online."
+    },
+    {
+     "file": "ami_192.wav",
+     "durS": 5.05,
+     "ms": 1209,
+     "rtf": 0.239,
+     "hyp": "Basically we got kind of this work really I think that's it. The answer to that isn't it?"
+    },
+    {
+     "file": "ami_1049.wav",
+     "durS": 7.88,
+     "ms": 1340,
+     "rtf": 0.17,
+     "hyp": "Now, I wonder how we want to do, you know, we want to pop up window with the speaker characterisation."
+    },
+    {
+     "file": "ami_1140.wav",
+     "durS": 6.4,
+     "ms": 1291,
+     "rtf": 0.202,
+     "hyp": "actually in the moment it's got a load of rubbish because the the the browser that I used from you know"
+    },
+    {
+     "file": "ami_1146.wav",
+     "durS": 6.24,
+     "ms": 1285,
+     "rtf": 0.206,
+     "hyp": "Yeah, yeah, but I don't know about you, but usually in Windows, right click doesn't do anything, does it?"
+    },
+    {
+     "file": "ami_1379.wav",
+     "durS": 10.07,
+     "ms": 1433,
+     "rtf": 0.142,
+     "hyp": "So maybe, I mean, we should definitely, well, we could probably not put it under this heading."
+    },
+    {
+     "file": "ami_1430.wav",
+     "durS": 6.28,
+     "ms": 1345,
+     "rtf": 0.214,
+     "hyp": "Yeah, I mean at the moment it works. It works with highlighting in the transcript window, doesn't it?"
+    },
+    {
+     "file": "ami_1437.wav",
+     "durS": 5.31,
+     "ms": 1178,
+     "rtf": 0.222,
+     "hyp": "I think I was wondering about that is I haven't looked at it so much better."
+    },
+    {
+     "file": "ami_1578.wav",
+     "durS": 6.74,
+     "ms": 936,
+     "rtf": 0.139,
+     "hyp": "flip it into just the transforms like style sheet,"
+    }
+   ],
+   "peakRendererMB": 877
+  }
+ ]
+}

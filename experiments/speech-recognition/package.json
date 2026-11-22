@@ -1,0 +1,18 @@
+{
+  "name": "monkeyspeak-speech-recognition-experiment",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "bench": "node bench.mjs",
+    "build:web": "esbuild web/entry.js --bundle --format=esm --platform=browser --outfile=web/transformers.web.js && mkdir -p web/ort && cp node_modules/onnxruntime-web/dist/ort-wasm-simd-threaded.* web/ort/",
+    "serve": "node web/serve.mjs"
+  },
+  "dependencies": {
+    "@huggingface/transformers": "4.3.2",
+    "playwright-core": "^1.65.1",
+    "wavefile": "^11.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2"
+  }
+}

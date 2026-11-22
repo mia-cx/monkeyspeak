@@ -1,0 +1,314 @@
+{
+ "check": {
+  "supported": true,
+  "unprefixed": true,
+  "processLocally": true,
+  "available": true,
+  "localEnUS": "downloading"
+ },
+ "install": {
+  "error": "install() did not settle in 120 s"
+ },
+ "clips": [
+  {
+   "set": "synth",
+   "file": "s1_correction.wav",
+   "local": false,
+   "text": "build a habit tracker on a habit tracker that let's people log daily habits no wait weekly habits and show a streak for each one",
+   "results": [
+    {
+     "text": "build a habit tracker",
+     "confidence": 0.9670787453651428,
+     "lagMs": null
+    },
+    {
+     "text": " on a habit tracker that let's people log daily habits",
+     "confidence": 0.9343641400337219,
+     "lagMs": null
+    },
+    {
+     "text": " no wait weekly habits and show a streak for each one",
+     "confidence": 0.9627799391746521,
+     "lagMs": 1552
+    }
+   ],
+   "errors": [],
+   "ref": "Build a habit tracker. Um, a habit tracker that, uh, lets people log daily habits. No, wait, weekly habits, and show a streak for each one."
+  },
+  {
+   "set": "synth",
+   "file": "s2_repetition.wav",
+   "local": false,
+   "text": "make a recipe app where users users can save recipes and like filter them by ingredients they already have",
+   "results": [
+    {
+     "text": "make a recipe app where users users can save recipes",
+     "confidence": 0.9338610768318176,
+     "lagMs": null
+    },
+    {
+     "text": " and like filter them by ingredients they already have",
+     "confidence": 0.9721955060958862,
+     "lagMs": 1538
+    }
+   ],
+   "errors": [],
+   "ref": "Make a, a recipe app where users, users can save recipes and, like, filter them by ingredients they already have."
+  },
+  {
+   "set": "synth",
+   "file": "s3_long_pause.wav",
+   "local": false,
+   "text": "create a budgeting app for students it should import Bank transactions group them by category and warned before rent is due",
+   "results": [
+    {
+     "text": "create a budgeting app for students",
+     "confidence": 0.9719551205635071,
+     "lagMs": null
+    },
+    {
+     "text": " it should import Bank transactions group them by category and warned before rent is due",
+     "confidence": 0.9681755304336548,
+     "lagMs": 1547
+    }
+   ],
+   "errors": [],
+   "ref": "Create a budgeting app for students. It should import bank transactions, group them by category, and warn before rent is due."
+  },
+  {
+   "set": "ami",
+   "file": "ami_31.wav",
+   "local": false,
+   "text": "I mean if you already started on doing stuff I guess we can",
+   "results": [
+    {
+     "text": "I mean if you already started on doing stuff I guess we can",
+     "confidence": 0.9605848789215088,
+     "lagMs": 1565
+    }
+   ],
+   "errors": [],
+   "ref": "I MEAN IF YOU ALREADY STARTED ON ON DOING YOUR STUFF I GUESS WE CAN"
+  },
+  {
+   "set": "ami",
+   "file": "ami_37.wav",
+   "local": false,
+   "text": "probably just two or two or three of whatever whatever they're looking at like dialing next to whatever characterization",
+   "results": [
+    {
+     "text": "probably just two or two or three of whatever whatever they're looking at like dialing next to whatever characterization",
+     "confidence": 0.9430775046348572,
+     "lagMs": 1667
+    }
+   ],
+   "errors": [],
+   "ref": "PROBABLY JUST TWO OR TWO OR THREE OF WHATEVER WHATEVER THEY'RE LOOKING AT LIKE DIALOGUE ACTS TO WHATEVER CHARACTERISATIONS"
+  },
+  {
+   "set": "ami",
+   "file": "ami_41.wav",
+   "local": false,
+   "text": "actually is the code accessible like the the GUI stuff that you've done",
+   "results": [
+    {
+     "text": "actually is the code accessible like the the GUI stuff that you've done",
+     "confidence": 0.9270222783088684,
+     "lagMs": 1573
+    }
+   ],
+   "errors": [],
+   "ref": "ACTUALLY IS THE CODE ACCESSIBLE LIKE THE THE GUI STUFF THAT YOU'VE DONE YEAH"
+  },
+  {
+   "set": "ami",
+   "file": "ami_52.wav",
+   "local": false,
+   "text": "yeah change the contents of the same window like from transcription to",
+   "results": [
+    {
+     "text": "yeah change the",
+     "confidence": 0.8137116432189941,
+     "lagMs": null
+    },
+    {
+     "text": " contents of the same window like from transcription to",
+     "confidence": 0.9697945713996887,
+     "lagMs": 1589
+    }
+   ],
+   "errors": [],
+   "ref": "YEAH UH CHANGE THE CONTENTS OF THE SAME WINDOW LIKE FROM TRANSCRIPTION TO SUMMARY"
+  },
+  {
+   "set": "ami",
+   "file": "ami_78.wav",
+   "local": false,
+   "text": "we've got browser with which comes up automatically with the transcription box and the topics",
+   "results": [
+    {
+     "text": "we've got browser with which comes up automatically with the transcription box and the topics",
+     "confidence": 0.9688997268676758,
+     "lagMs": 1548
+    }
+   ],
+   "errors": [],
+   "ref": "WE'VE GO A BROWSER WE'VE UM WHICH COMES UP AUTOMATICALLY WITH A TRANSCRIPTION BOX AND THE TOPICS"
+  },
+  {
+   "set": "ami",
+   "file": "ami_152.wav",
+   "local": false,
+   "text": "cuz I see all these all these damn things I mixed from you know all these drop-down menus and tick boxes on it from Google online",
+   "results": [
+    {
+     "text": "cuz I see all these all these damn things I mixed from you know all these drop-down menus and tick boxes on it from Google online",
+     "confidence": 0.9589897394180298,
+     "lagMs": null
+    }
+   ],
+   "errors": [],
+   "ref": "IT'S ACTUALLY ALL THESE ALL THESE UM THINGS ARE ARE NICKED FROM UM YOU KNOW ALL THESE DROP DOWN MENUS AND TICK BOXES ARE NICKED FROM GOOGLE ONLINE"
+  },
+  {
+   "set": "ami",
+   "file": "ami_192.wav",
+   "local": false,
+   "text": "television work really I think that's",
+   "results": [
+    {
+     "text": "television work really I think that's",
+     "confidence": 0.950694739818573,
+     "lagMs": 1638
+    }
+   ],
+   "errors": [],
+   "ref": "SO BASICALLY WE GO AND GO AND DO SOME WORK REALLY I THINK THAT'S THE UM THE UM THE ANSWER TO THAT ISN'T IT"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1049.wav",
+   "local": false,
+   "text": "now I wonder how we want to do you know we want to pop up window with the speaker characterization",
+   "results": [
+    {
+     "text": "now",
+     "confidence": 0.6824629306793213,
+     "lagMs": null
+    },
+    {
+     "text": " I wonder how we want to do you know we want to pop up window with the speaker characterization",
+     "confidence": 0.9492985606193542,
+     "lagMs": 1581
+    }
+   ],
+   "errors": [],
+   "ref": "UM NOW I WONDER WH HOW WE WANNA DO YOU KNOW WE WANT A POP UP WINDOW WITH THE SPEAKER CHARACTERISATION"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1140.wav",
+   "local": false,
+   "text": "Ashley in the moment it's got a load of rubbish because the the browser that I used from this from",
+   "results": [
+    {
+     "text": "Ashley in the moment it's got a load of rubbish because the the browser that I used from this from",
+     "confidence": 0.9221981167793274,
+     "lagMs": 1629
+    }
+   ],
+   "errors": [],
+   "ref": "ACTUALLY IN THE MOMENT IT'S GOT A LOAD OF RUBBISH BECAUSE THE THE UM THE BROWSER THAT I USED FROM THIS FROM YOU KNOW"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1146.wav",
+   "local": false,
+   "text": "yeah yeah but I don't know about you but it usually in Windows right click doesn't do anything does it",
+   "results": [
+    {
+     "text": "yeah yeah but I don't know about you but it usually in Windows right click doesn't do anything does it",
+     "confidence": 0.9343220591545105,
+     "lagMs": 1600
+    }
+   ],
+   "errors": [],
+   "ref": "YEAH YEAH BUT UM I DON'T KNOW ABOUT YOU BUT UH USUALLY IN WINDOWS RIGHT CLICK DOESN'T DO ANYTHING DOES IT"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1379.wav",
+   "local": false,
+   "text": "so maybe I mean we should we should definitely well we could probably not put it under this head",
+   "results": [
+    {
+     "text": "so maybe I mean we should we should definitely well we could probably not put it under this head",
+     "confidence": 0.9459417462348938,
+     "lagMs": 1576
+    }
+   ],
+   "errors": [],
+   "ref": "UM UM SO MAYBE I MEAN WE WE SHOULD WE SHOULD DEFINITELY WELL WE COULD PROBABLY NOT PUT IT UNDER THIS HEADING"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1430.wav",
+   "local": false,
+   "text": "yeah I mean at the moment it works it works with highlighting in in the transcript window",
+   "results": [
+    {
+     "text": "yeah I mean at the moment it works",
+     "confidence": 0.9413912892341614,
+     "lagMs": null
+    },
+    {
+     "text": " it works with highlighting in in the transcript window",
+     "confidence": 0.9284855723381042,
+     "lagMs": 1599
+    }
+   ],
+   "errors": [],
+   "ref": "UM YEAH I MEAN UM AT THE MOMENT IT WORKS IT WORKS WITH HIGHLIGHTING IN IN THE TRANSCRIPT WINDOW DOESN'T IT"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1437.wav",
+   "local": false,
+   "text": "I think I was wondering about that is I haven't looked at it so much",
+   "results": [
+    {
+     "text": "I think I was wondering about that is",
+     "confidence": 0.9269995093345642,
+     "lagMs": null
+    },
+    {
+     "text": " I haven't looked at it so much",
+     "confidence": 0.9658122062683105,
+     "lagMs": 1589
+    }
+   ],
+   "errors": [],
+   "ref": "UM I THINK UH I WAS WONDERING ABOUT THAT IS UH I HAVEN'T LOOKED AT IT SO MUCH"
+  },
+  {
+   "set": "ami",
+   "file": "ami_1578.wav",
+   "local": false,
+   "text": "flip it into just transforms on like a style sheet done XML",
+   "results": [
+    {
+     "text": "flip it into",
+     "confidence": 0.9639570713043213,
+     "lagMs": null
+    },
+    {
+     "text": " just transforms on like a style sheet done XML",
+     "confidence": 0.9363240003585815,
+     "lagMs": 1599
+    }
+   ],
+   "errors": [],
+   "ref": "FLIP IT INTO UH YEAH JUST UH TRANSFORMS UM LIKE UM STYLE SHEET THE UM X. M. L. STYLE SHEET"
+  }
+ ]
+}
