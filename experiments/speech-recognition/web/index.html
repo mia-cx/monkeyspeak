@@ -114,12 +114,12 @@ window.installWebSpeech = async () => {
 // Feeds a clip to Web Speech through start(MediaStreamTrack), so the same audio is tested without a microphone.
 window.webSpeechClip = async (set, file, { local = true } = {}) => {
   const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (local && !("processLocally" in SR.prototype)) return { set, file, local, text: "", results: [], errors: ["processLocally unsupported; not started"] };
   const ctx = new AudioContext();
   const buf = await ctx.decodeAudioData(await (await fetch(`../audio/${set}/${file}`)).arrayBuffer());
   const dest = ctx.createMediaStreamDestination();
   const src = ctx.createBufferSource(); src.buffer = buf; src.connect(dest);
   const rec = new SR(); rec.lang = "en-US"; rec.continuous = true; rec.interimResults = false; rec.maxAlternatives = 1;
-  if (local && !("processLocally" in rec)) return { set, file, local, text: "", results: [], errors: ["processLocally unsupported; not started"] };
   if ("processLocally" in rec) rec.processLocally = local;
   const results = [], errors = [];
   let tEnd;
