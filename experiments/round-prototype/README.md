@@ -1,15 +1,55 @@
 # One-round prototype
 
-Disposable experiment supporting [issue #7](https://github.com/mia-cx/monkeyspeak/issues/7): does a complete think → prompt → feedback round feel useful? This is not production UI or an accepted scoring decision.
+Disposable experiment for [issue #7](https://github.com/mia-cx/monkeyspeak/issues/7): does a complete think → prompt → feedback round feel useful? This is not production UI or an accepted scoring decision.
 
-From this directory, run `node serve.mjs`, then open http://localhost:8766. Node 22 recommended. No install is needed to play. Internet access is needed for the speech model's first load; Typing works without it. Localhost supports microphone access. Use `PORT=8000 node serve.mjs` for another port.
+## Run
 
-Choose Speech or Typing, start, and stop when finished. The clock includes thinking and stops at 90 seconds. Speech loads Moonshine Base in the background on WASM; Tiny is selectable. Model downloads can take a minute. No microphone or a failed download leaves Typing available. Silence below −45 dB for at least 0.5 seconds splits utterances; a 12-second safety split and token limit reduce long-audio loops. Think time comes from audio energy (typing: first input), not recognition output. Speak time is the interval from first input to stop, including pauses. Audio stays in memory and is discarded after recognition.
+From this directory:
 
-`rubric.js` contains every draft tunable and pure scoring functions. Factors retain full precision until the final half-up score rounding. `grader.js` is an async mock: replace `grade({challenge, transcript})` with a real grader returning four 0–4 dimensions, exclusive character-offset `duplicatedSpans`, and `manipulation`. Keyword and repeated-phrase heuristics are deliberately crude; they do not establish recognition or grading accuracy.
+```sh
+node serve.mjs
+```
 
-`recognizers/moonshine.js` exports `defaultModel` (one line to select Tiny) and the model IDs. Swap the `Moonshine` import in `app.js` for another recognizer with async `start(optionalStream)` and `stop()` returning `{transcript, firstSpeechAt}`; the timestamp uses `performance.now()`, or null for no speech. Timing and grading remain separate. The server sends COOP and COEP `credentialless` for CDN-loaded multi-threaded WASM.
+Open http://localhost:8766. Node 22 recommended; no install needed. Use `PORT=8000 node serve.mjs` for another port.
 
-Personal bests are stored per mode in localStorage under `monkeyspeak-round-prototype-v1`. Voiding a round restores the best remaining eligible result. Nothing is uploaded by the app; model assets come from jsDelivr and Hugging Face.
+Speech downloads model assets from jsDelivr and Hugging Face. Typing works without those downloads. The server sends COOP and COEP `credentialless` headers for multi-threaded WASM; localhost supports microphone access.
 
-Run `node --test` for the six draft worked examples, ranking, empty input, manipulation and eligibility boundaries. `npm install` installs only the optional Playwright browser-check dependency.
+Run `node --test` for the six draft worked examples, ranking, empty input, manipulation and eligibility boundaries.
+
+## Play
+
+Choose Speech or Typing, start, and stop when finished. Thinking time counts. The round stops automatically at 90 seconds.
+
+Moonshine Base loads in the background on WASM; Tiny is selectable. Downloads can take a minute. If loading fails or no microphone is available, use Typing.
+
+Think time comes from audio energy, or the first input in Typing. Speak time runs from first input to stop, including pauses. Silence below −45 dB for at least 0.5 seconds splits utterances. A 12-second safety split and token limit reduce long-audio loops.
+
+Personal bests are stored per mode in localStorage under `monkeyspeak-round-prototype-v1`. Voiding restores the best remaining eligible result. Audio stays in memory; the app uploads no recordings or prompts.
+
+## Swap
+
+### Rubric
+
+Edit the tunable values in `rubric.js`. Its pure functions keep full precision until the final half-up score rounding.
+
+### Grader
+
+Replace async `grade({challenge, transcript})` in `grader.js`. Return four 0–4 `dimensions`, `duplicatedSpans` with exclusive character offsets, and a `manipulation` flag.
+
+### Recognizer
+
+The selection line near the top of `app.js` is:
+
+```js
+const SpeechRecognizer = Moonshine;
+```
+
+Import a replacement and set that line to its class. The constructor receives the selected model key and a progress callback. Expose a `ready` promise, async `start(optionalStream)`, and async `stop()` returning `{transcript, firstSpeechAt}`. Use a `performance.now()` timestamp, or null for no speech. Timing and grading remain separate.
+
+For Moonshine, change `defaultModel` in `recognizers/moonshine.js` to select Tiny by default. Model IDs are in the same file.
+
+## What is mocked
+
+The grader uses keyword and repeated-phrase heuristics, not a model. Its grades do not establish recognition or grading accuracy, and unrelated prompts can receive overly generous grades.
+
+Speech recognition is real, local Moonshine inference. The rubric values are an unaccepted draft, kept easy to replace.
