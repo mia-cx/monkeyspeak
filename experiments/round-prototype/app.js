@@ -16,6 +16,7 @@ const ideas = [
 let challenge;
 let recognizer;
 let speech;
+let speechLoadError;
 let started;
 let interval;
 let round;
@@ -48,6 +49,7 @@ function save() {
 }
 
 function load() {
+  speechLoadError = null;
   const previous = speech;
   const candidate = new SpeechRecognizer($('model').value, (message) =>
     queueMicrotask(() => {
@@ -60,13 +62,37 @@ function load() {
       console.error('Could not dispose previous recognizer:', error);
     });
   }
-  candidate.ready.catch((error) => {
+  candidate.ready.catch(async (error) => {
     if (speech !== candidate) return;
+    speechLoadError = error;
     $('load').textContent =
       `Speech unavailable: ${error.message}. Typing is ready.`;
     $('mode').value = 'typing';
     updateMode();
+    if (recognizer === candidate && interval) {
+      busy = true;
+      try {
+        await abortSpeechRound(candidate);
+      } finally {
+        busy = false;
+      }
+    }
   });
+}
+
+async function abortSpeechRound(candidate) {
+  clearInterval(interval);
+  interval = null;
+  await candidate.abort();
+  round = null;
+  $('stop').hidden = true;
+  $('results').hidden = true;
+  $('after').hidden = true;
+  $('start').hidden = false;
+  $('start').disabled = false;
+  $('mode').disabled = false;
+  $('model').disabled = false;
+  $('status').textContent = 'Speech unavailable. Start a new Typing round.';
 }
 
 function updateMode() {
@@ -96,6 +122,10 @@ async function start(same = false) {
     mode = $('mode').value;
     recognizer = mode === 'typing' ? new Typing($('input')) : speech;
     await recognizer.start();
+    if (mode === 'speech' && speechLoadError) {
+      await abortSpeechRound(recognizer);
+      return;
+    }
     if (!same || !challenge) challenge = randomIdea();
     $('idea').textContent = challenge.text;
     $('par').textContent =
