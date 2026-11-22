@@ -1,1 +1,8 @@
-{"private":true,"type":"module","scripts":{"start":"node serve.mjs","test":"node --test"},"devDependencies":{"playwright-core":"^1.56.1"}}
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node serve.mjs",
+    "test": "node --test"
+  }
+}
