@@ -64,7 +64,7 @@ window.runProbe = async (name = $("model").value, device = $("device").value) =>
   log(`== ${name} on ${device}`);
   const clips = await loadClips();
   const { asr, loadMs, downloadMB } = await load(name, device);
-  log(`load ${loadMs} ms (download counted ${downloadMB} MB; 0 means served from cache)`);
+  log(`load ${loadMs} ms (model files ${downloadMB} MB, network or cache)`);
   const t0 = performance.now(); await asr(clips[0].audio); const firstMs = Math.round(performance.now() - t0);
   const rows = [];
   for (const c of clips) {
