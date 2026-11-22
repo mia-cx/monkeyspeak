@@ -3,6 +3,36 @@ export const models = {
   tiny: 'onnx-community/moonshine-tiny-ONNX',
 };
 export const defaultModel = 'base';
+
+export function segmentAudio(audio) {
+  const segments = [];
+  const frameSize = 160;
+  let start = null;
+  let quiet = 0;
+
+  for (let i = 0; i < audio.length; i += frameSize) {
+    const end = Math.min(i + frameSize, audio.length);
+    let energy = 0;
+    for (let j = i; j < end; j++) energy += audio[j] * audio[j];
+    const voiced = 20 * Math.log10(Math.sqrt(energy / (end - i)) + 1e-9) >= -45;
+
+    if (voiced) {
+      start ??= Math.max(0, i - 1600);
+      quiet = 0;
+    } else {
+      quiet += end - i;
+    }
+
+    if (start !== null && (quiet >= 8000 || end - start >= 16000 * 12)) {
+      segments.push(audio.slice(start, end));
+      start = null;
+    }
+  }
+
+  if (start !== null) segments.push(audio.slice(start));
+  return segments;
+}
+
 export class Moonshine {
   constructor(model = defaultModel, progress = () => {}) {
     this.ready = this.load(model, progress);
@@ -41,16 +71,12 @@ export class Moonshine {
     this.context = new AudioContext({ sampleRate: 16000 });
     await this.context.resume();
     this.firstSpeechAt = null;
-    this.parts = [];
-    this.samples = [];
-    this.quiet = 0;
-    this.active = false;
-    this.error = null;
-    this.queue = Promise.resolve();
+    this.chunks = [];
     this.source = this.context.createMediaStreamSource(this.stream);
     this.processor = this.context.createScriptProcessor(1024, 1, 1);
     this.processor.onaudioprocess = (e) => {
       const audio = e.inputBuffer.getChannelData(0);
+      this.chunks.push(audio.slice());
       let energy = 0;
       for (const x of audio) energy += x * x;
       const voiced =
@@ -58,48 +84,38 @@ export class Moonshine {
       if (voiced) {
         this.firstSpeechAt ??=
           performance.now() - (audio.length / 16000) * 1000;
-        this.active = true;
-        this.quiet = 0;
-      } else this.quiet += audio.length;
-      if (this.active) this.samples.push(...audio);
-      if (
-        this.active &&
-        (this.quiet >= 8000 || this.samples.length >= 16000 * 12)
-      )
-        this.flush();
+      }
     };
     this.source.connect(this.processor);
     this.processor.connect(this.context.destination);
   }
-  flush() {
-    if (!this.samples.length) return;
-    const audio = Float32Array.from(this.samples);
-    this.samples = [];
-    this.active = false;
-    this.queue = this.queue
-      .then(async () => {
-        const result = await this.asr(audio, {
-          max_new_tokens: Math.min(
-            160,
-            Math.max(12, Math.ceil((audio.length / 16000) * 8)),
-          ),
-        });
-        this.parts.push(result.text.trim());
-      })
-      .catch((e) => {
-        this.error = e;
-      });
-  }
   async stop() {
+    this.processor.onaudioprocess = null;
     this.processor.disconnect();
     this.source.disconnect();
     this.stream.getTracks().forEach((t) => t.stop());
     await this.context.close();
-    this.flush();
-    await this.queue;
-    if (this.error) throw this.error;
+    const audio = new Float32Array(
+      this.chunks.reduce((sum, chunk) => sum + chunk.length, 0),
+    );
+    let offset = 0;
+    for (const chunk of this.chunks) {
+      audio.set(chunk, offset);
+      offset += chunk.length;
+    }
+    this.chunks = [];
+    const parts = [];
+    for (const segment of segmentAudio(audio)) {
+      const result = await this.asr(segment, {
+        max_new_tokens: Math.min(
+          160,
+          Math.max(12, Math.ceil((segment.length / 16000) * 8)),
+        ),
+      });
+      parts.push(result.text.trim());
+    }
     return {
-      transcript: this.parts.join(' '),
+      transcript: parts.join(' '),
       firstSpeechAt: this.firstSpeechAt,
     };
   }

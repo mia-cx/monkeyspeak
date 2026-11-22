@@ -22,7 +22,9 @@ Choose Speech or Typing, start, and stop when finished. Thinking time counts. Th
 
 Moonshine Base loads in the background on WASM; Tiny is selectable. Downloads can take a minute. If loading fails or no microphone is available, use Typing.
 
-Think time comes from audio energy, or the first input in Typing. Speak time runs from first input to stop, including pauses. Silence below −45 dB for at least 0.5 seconds splits utterances. A 12-second safety split and token limit reduce long-audio loops.
+Think time comes from audio energy, or the first input in Typing. Speak time runs from first input to stop, including pauses.
+
+During a speech round, the app only records audio and tracks first speech. After Stop, it splits the full recording at silences below −45 dB lasting at least 0.5 seconds, then transcribes the segments sequentially. A 12-second safety split and token limit reduce long-audio loops. Transcription and grading latency do not count toward elapsed time.
 
 Personal bests are stored per mode in localStorage under `monkeyspeak-round-prototype-v1`. Voiding restores the best remaining eligible result. Audio stays in memory; the app uploads no recordings or prompts.
 

@@ -135,9 +135,11 @@ async function stop() {
   interval = null;
   $('stop').hidden = true;
   $('timer').textContent = T.toFixed(1) + ' s';
-  $('status').textContent = 'Finalizing transcript and grading…';
+  $('status').textContent = mode === 'speech' ? 'Transcribing…' : 'Grading…';
+  await new Promise(requestAnimationFrame);
   try {
     const { transcript, firstSpeechAt } = await recognizer.stop();
+    $('status').textContent = 'Grading…';
     const judged = await grade({ challenge: challenge.text, transcript });
     const D = duplication(transcript, judged.duplicatedSpans);
     const result = evaluate({ ...judged, D, T, P: challenge.par });
