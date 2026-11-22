@@ -63,17 +63,15 @@ export class Moonshine {
   }
   async start(stream) {
     await this.ready;
-    this.stream =
-      stream ||
-      (await navigator.mediaDevices.getUserMedia({
-        audio: { channelCount: 1, sampleRate: 16000 },
-      }));
     this.context = new AudioContext({ sampleRate: 16000 });
     await this.context.resume();
     this.firstSpeechAt = null;
     this.chunks = [];
-    this.source = this.context.createMediaStreamSource(this.stream);
     this.processor = this.context.createScriptProcessor(1024, 1, 1);
+    let captureReady;
+    let capturing = new Promise((resolve) => {
+      captureReady = resolve;
+    });
     this.processor.onaudioprocess = (e) => {
       const audio = e.inputBuffer.getChannelData(0);
       this.chunks.push(audio.slice());
@@ -85,9 +83,30 @@ export class Moonshine {
         this.firstSpeechAt ??=
           performance.now() - (audio.length / 16000) * 1000;
       }
+      captureReady();
     };
-    this.source.connect(this.processor);
+    // Warm the capture graph before the microphone starts producing audio.
     this.processor.connect(this.context.destination);
+    await capturing;
+    try {
+      this.stream =
+        stream ||
+        (await navigator.mediaDevices.getUserMedia({
+          audio: { channelCount: 1, sampleRate: 16000 },
+        }));
+    } catch (error) {
+      this.processor.disconnect();
+      await this.context.close();
+      throw error;
+    }
+    this.firstSpeechAt = null;
+    this.chunks = [];
+    capturing = new Promise((resolve) => {
+      captureReady = resolve;
+    });
+    this.source = this.context.createMediaStreamSource(this.stream);
+    this.source.connect(this.processor);
+    await capturing;
   }
   async dispose() {
     await this.ready.catch(() => {});

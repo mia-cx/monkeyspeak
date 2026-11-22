@@ -90,7 +90,8 @@ async function start(same = false) {
   $('next').disabled = true;
   $('mode').disabled = true;
   $('model').disabled = true;
-  $('status').textContent = 'Preparing input…';
+  $('status').textContent =
+    $('mode').value === 'speech' ? 'Starting mic…' : 'Preparing input…';
   try {
     mode = $('mode').value;
     recognizer = mode === 'typing' ? new Typing($('input')) : speech;
