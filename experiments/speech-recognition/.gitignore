@@ -1,0 +1,4 @@
+node_modules/
+web/transformers.web.js
+web/ort/
+voices/
