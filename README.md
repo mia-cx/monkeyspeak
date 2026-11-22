@@ -1,5 +1,12 @@
 # Monkeyspeak
 
+<a href="https://0rwx.com">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://0rwx.com/static/AI-W-dark.svg">
+    <img alt="AI:W" src="https://0rwx.com/static/AI-W-light.svg" height="48">
+  </picture>
+</a>
+
 Practice turning an idea into a clear spoken prompt, fast.
 
 Start a round, see an idea for an app, think, and speak your prompt. Get feedback on time, duplication, and usefulness. Browser speech recognition and a small local model are the intended direction. This repository currently holds the planning entrypoint.
