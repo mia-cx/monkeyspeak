@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Monkeyspeak · round prototype</title>
+  <link rel="icon" href="data:," />
+  <link rel="stylesheet" href="style.css" />
+  <main>
+    <header>
+      <span>MONKEYSPEAK / EXPERIMENT 01</span>
+      <span id="best"></span>
+    </header>
+    <h1>One idea. Make it buildable.</h1>
+    <p>Disposable round prototype · draft scoring · heuristic grader</p>
+    <section class="controls">
+      <label>
+        Input
+        <select id="mode">
+          <option value="speech">Speech</option>
+          <option value="typing">Typing</option>
+        </select>
+      </label>
+      <label>
+        Recognizer
+        <select id="model">
+          <option value="base">Moonshine Base</option>
+          <option value="tiny">Moonshine Tiny</option>
+        </select>
+      </label>
+    </section>
+    <p id="load" role="status">Loading recognizer…</p>
+    <section id="challenge">
+      <span class="eyebrow">YOUR CHALLENGE</span>
+      <h2 id="idea">Ready when you are.</h2>
+      <p id="par">Think, then give a concrete prompt. Thinking time counts.</p>
+    </section>
+    <div class="clock">
+      <output id="timer">0.0 s</output>
+      <span>90 s cap</span>
+    </div>
+    <textarea
+      id="input"
+      placeholder="Your prompt…"
+      aria-label="Your prompt"
+      disabled
+      hidden
+    ></textarea>
+    <p id="status" role="status"></p>
+    <button id="start">Start round</button>
+    <button id="stop" hidden>Stop</button>
+    <section id="results" hidden aria-live="polite"></section>
+    <div id="after" hidden>
+      <button id="void">Void · recognition error</button>
+      <button id="retry">Retry same idea</button>
+      <button id="next">Next idea</button>
+    </div>
+  </main>
+  <script type="module" src="app.js"></script>
+</html>
