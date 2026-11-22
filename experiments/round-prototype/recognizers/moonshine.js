@@ -89,6 +89,10 @@ export class Moonshine {
     this.source.connect(this.processor);
     this.processor.connect(this.context.destination);
   }
+  async dispose() {
+    await this.ready.catch(() => {});
+    await this.asr?.dispose();
+  }
   async stop() {
     this.processor.onaudioprocess = null;
     this.processor.disconnect();

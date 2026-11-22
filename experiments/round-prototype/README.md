@@ -46,7 +46,7 @@ The selection line near the top of `app.js` is:
 const SpeechRecognizer = Moonshine;
 ```
 
-Import a replacement and set that line to its class. The constructor receives the selected model key and a progress callback. Expose a `ready` promise, async `start(optionalStream)`, and async `stop()` returning `{transcript, firstSpeechAt}`. Use a `performance.now()` timestamp, or null for no speech. Timing and grading remain separate.
+Import a replacement and set that line to its class. The constructor receives the selected model key and a progress callback. Expose a `ready` promise, async `start(optionalStream)`, async `stop()` returning `{transcript, firstSpeechAt}`, and async `dispose()` to release model resources when switching recognizers. Use a `performance.now()` timestamp, or null for no speech. Timing and grading remain separate.
 
 For Moonshine, change `defaultModel` in `recognizers/moonshine.js` to select Tiny by default. Model IDs are in the same file.
 

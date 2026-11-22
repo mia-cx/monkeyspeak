@@ -48,12 +48,18 @@ function save() {
 }
 
 function load() {
+  const previous = speech;
   const candidate = new SpeechRecognizer($('model').value, (message) =>
     queueMicrotask(() => {
       if (speech === candidate) $('load').textContent = message;
     }),
   );
   speech = candidate;
+  if (previous) {
+    previous.dispose().catch((error) => {
+      console.error('Could not dispose previous recognizer:', error);
+    });
+  }
   candidate.ready.catch((error) => {
     if (speech !== candidate) return;
     $('load').textContent =
