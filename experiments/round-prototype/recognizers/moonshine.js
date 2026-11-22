@@ -62,9 +62,13 @@ export class Moonshine {
     return message;
   }
   async start(stream) {
-    await this.ready;
     this.context = new AudioContext({ sampleRate: 16000 });
-    await this.context.resume();
+    const resumed = this.context.resume();
+    const microphone =
+      stream ||
+      navigator.mediaDevices.getUserMedia({
+        audio: { channelCount: 1, sampleRate: 16000 },
+      });
     this.firstSpeechAt = null;
     this.chunks = [];
     this.processor = this.context.createScriptProcessor(1024, 1, 1);
@@ -85,15 +89,10 @@ export class Moonshine {
       }
       captureReady();
     };
-    // Warm the capture graph before the microphone starts producing audio.
+    // Warm the graph while microphone permission is pending.
     this.processor.connect(this.context.destination);
-    await capturing;
     try {
-      this.stream =
-        stream ||
-        (await navigator.mediaDevices.getUserMedia({
-          audio: { channelCount: 1, sampleRate: 16000 },
-        }));
+      [this.stream] = await Promise.all([microphone, resumed]);
     } catch (error) {
       this.processor.disconnect();
       await this.context.close();
@@ -128,6 +127,7 @@ export class Moonshine {
     }
     this.chunks = [];
     const parts = [];
+    await this.ready;
     for (const segment of segmentAudio(audio)) {
       const result = await this.asr(segment, {
         max_new_tokens: Math.min(

@@ -17,15 +17,37 @@ test('recorded audio keeps opening and closing utterances across pauses and safe
   assert.deepEqual(segmentAudio(new Float32Array(16000)), []);
 });
 
-test('speech start waits for captured samples before allowing challenge reveal', async (t) => {
+test('speech start requests mic and resumes audio immediately without waiting for the model, then gates reveal on samples', async (t) => {
   const processor = { connect() {} };
+  let resumed = false;
+  let requestedMic = false;
   const originalAudioContext = globalThis.AudioContext;
+  const originalNavigator = Object.getOwnPropertyDescriptor(
+    globalThis,
+    'navigator',
+  );
   t.after(() => {
     if (originalAudioContext) globalThis.AudioContext = originalAudioContext;
     else delete globalThis.AudioContext;
+    if (originalNavigator)
+      Object.defineProperty(globalThis, 'navigator', originalNavigator);
+    else delete globalThis.navigator;
+  });
+  Object.defineProperty(globalThis, 'navigator', {
+    configurable: true,
+    value: {
+      mediaDevices: {
+        async getUserMedia() {
+          requestedMic = true;
+          return {};
+        },
+      },
+    },
   });
   globalThis.AudioContext = class {
-    async resume() {}
+    async resume() {
+      resumed = true;
+    }
     createMediaStreamSource() {
       return { connect() {} };
     }
@@ -34,17 +56,16 @@ test('speech start waits for captured samples before allowing challenge reveal',
     }
   };
   const recognizer = Object.create(Moonshine.prototype);
-  recognizer.ready = Promise.resolve();
+  recognizer.ready = new Promise(() => {});
   let started = false;
-  const starting = recognizer.start({}).then(() => {
+  const starting = recognizer.start().then(() => {
     started = true;
   });
+  assert.equal(resumed, true);
+  assert.equal(requestedMic, true);
   await new Promise(setImmediate);
   assert.equal(started, false);
   const samples = new Float32Array(1024);
-  processor.onaudioprocess({ inputBuffer: { getChannelData: () => samples } });
-  await new Promise(setImmediate);
-  assert.equal(started, false);
   processor.onaudioprocess({ inputBuffer: { getChannelData: () => samples } });
   await starting;
   assert.equal(started, true);
