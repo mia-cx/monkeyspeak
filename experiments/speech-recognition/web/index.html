@@ -86,9 +86,12 @@ $("mic").onclick = async () => {
   const rec = new MediaRecorder(stream); const chunks = [];
   rec.ondataavailable = (e) => chunks.push(e.data); rec.start(); log("recording 10 s…");
   await new Promise((r) => setTimeout(r, 10000)); rec.stop(); await new Promise((r) => (rec.onstop = r)); stream.getTracks().forEach((t) => t.stop());
-  const audio = (await new AudioContext({ sampleRate: 16000 }).decodeAudioData(await new Blob(chunks).arrayBuffer())).getChannelData(0);
+  const ctx = new AudioContext({ sampleRate: 16000 });
+  const audio = (await ctx.decodeAudioData(await new Blob(chunks).arrayBuffer())).getChannelData(0);
+  ctx.close();
   const { asr, loadMs } = await load($("model").value, $("device").value);
   const t = performance.now(); const { text } = await asr(audio); log(`mic: load ${loadMs} ms, transcribe ${Math.round(performance.now() - t)} ms: ${text}`);
+  await asr.dispose();
 };
 
 window.checkWebSpeech = async () => {
